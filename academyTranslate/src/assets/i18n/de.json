@@ -1,0 +1,12 @@
+{
+    "HOME": {
+        "title": "Zuhause",
+        "greeting": "Hey {{name}}! Willkommen in der Ionic Academy!",
+        "withcode": "<br><br>Sie sind <b>epos</b>!",
+        "btn": "Benachrichtigung anzeigen"
+    },
+    "ALERT": {
+        "header": "Error",
+        "msg": "Bei Ihrer Operation ist ein Problem aufgetreten"
+    }
+}

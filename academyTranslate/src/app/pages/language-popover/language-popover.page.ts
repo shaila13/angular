@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { LanguageService } from './../../services/language.service';
 
 @Component({
   selector: 'app-language-popover',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LanguagePopoverPage implements OnInit {
 
-  constructor() { }
-
+  languages = [];
+  selected = '';
+ 
+  constructor(private languageService: LanguageService, private popoverCtrl: PopoverController) { }
+ 
   ngOnInit() {
+    this.languages = this.languageService.getLanguages();
+    this.selected = this.languageService.selected;
   }
-
+ 
+  select(lng) {
+    this.languageService.setLanguage(lng);
+    this.popoverCtrl.dismiss();
+  }
+ 
 }

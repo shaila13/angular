@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ]),
     TranslateModule
   ],
-  
+
   declarations: [HomePage]
 })
 export class HomePageModule {}
