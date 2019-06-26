@@ -1,0 +1,7 @@
+{
+  "name": "CameraPreview",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
