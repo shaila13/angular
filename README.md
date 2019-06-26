@@ -12,7 +12,7 @@ npm i @ngx-translate/core @ngx-translate/http-loader
 ## Store user selected language
 npm i @ionic/storage
 
-![Imagen app](https://raw.githubusercontent.com/shaila13/angular/tree/master/academyTranslate/idiomas.png)
+![Imagen app](https://github.com/shaila13/angular/tree/master/academyTranslate/idiomas.png)
 
 
 
