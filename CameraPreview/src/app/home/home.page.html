@@ -1,14 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Pruebas con CameraPreview para controlar el flash
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
+<ion-content padding>
+
     The world is your oyster.
     <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<button ion-button (click)="takePhoto()" full color="primary">TAKE PHOTO</button>
+<button ion-button (click)="getImage()" full color="secondary">GET PHOTO FROM LIBRARY</button>
+
+<p aling="center"><img src="{{image}}"></p>
 </ion-content>
