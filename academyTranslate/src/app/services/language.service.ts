@@ -28,6 +28,7 @@ export class LanguageService {
   getLanguages() {
     return [
       { text: 'English', value: 'en'},
+      { text: 'Spanish', value: 'es'},
       { text: 'German', value: 'de'},
     ];
   }
