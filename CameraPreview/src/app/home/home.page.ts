@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { CameraPreview } from '@ionic-native/camera-preview/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { HttpClient } from 'selenium-webdriver/http';
+
 
 
 @Component({
@@ -11,8 +13,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 })
 export class HomePage {
   image: any;
-  
-  constructor(private cameraPreview: CameraPreview, private camera: Camera) {}
+
+  constructor(private cameraPreview: CameraPreview, private camera: Camera, public http: HttpClient) {}
 
   takePhoto() {
     const options: CameraOptions = {
@@ -24,10 +26,7 @@ export class HomePage {
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: true
     }
-   
-      let flash_mode = 'off';
-      this.cameraPreview.setFlashMode(flash_mode);
-    
+
     this.camera.getPicture(options).then((imageData) => {
       this.image = 'data:image/jpeg;base64,' + imageData;
 
@@ -55,4 +54,57 @@ getImage() {
   });
 
 }
+cropped(){
+  const options: CameraOptions = {
+    quality: 100,
+    targetWidth: 300,
+    targetHeight: 500,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    saveToPhotoAlbum: false,
+    allowEdit:true
+  }
+  this.camera.getPicture(options).then((imageData) => {
+    this.image = 'data:image/jpeg;base64,' + imageData;
+
+  }, (err) => {
+    console.log('ERROR ' + err);
+  });
+}
+
+
+sendPicture( ) {
+  const random = Math.floor(Math.random() * 1000);
+  const fileName = 'image_' + random + '.jpg';
+
+  const formDataToUpload = new FormData();
+  const blob = this.dataURItoBlob(this.image);
+
+  formDataToUpload.append('image', blob, fileName);
+
+
+}
+post(formDataToUpload: FormData): Observable<any> {
+  return this.http.post('http://192.168.11.1:5000/upload', formDataToUpload);
+}
+private dataURItoBlob(dataURI: any) {
+
+  // convert base64/URLEncoded data component to raw binary data held in a string
+              let byteString: string;
+              if (dataURI.split(',')[0].indexOf('base64') >= 0) {
+                  byteString = atob(dataURI.split(',')[1]);
+
+              } else {
+                  byteString = unescape(dataURI.split(',')[1]);
+              }
+              // separate out the mime component
+              const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+              // write the bytes of the string to a typed array
+
+              const ia = new Uint8Array(byteString.length);
+              for (let i = 0; i < byteString.length; i++) {
+                  ia[i] = byteString.charCodeAt(i);
+              }
+              return new Blob([ia], {type: mimeString});
+          }
 }

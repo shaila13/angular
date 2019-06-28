@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CameraPreview } from '@ionic-native/camera-preview/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

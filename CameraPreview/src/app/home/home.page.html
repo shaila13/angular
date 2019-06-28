@@ -1,17 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Pruebas con CameraPreview para controlar el flash
+      Pruebas con CameraPreview
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-<button ion-button (click)="takePhoto()" full color="primary">TAKE PHOTO</button>
-<button ion-button (click)="getImage()" full color="secondary">GET PHOTO FROM LIBRARY</button>
-
+<ion-button (click)="takePhoto()" expand="full" color="primary">TAKE PHOTO</ion-button>
+<ion-button (click)="getImage()" expand="full" color="secondary">GET PHOTO FROM LIBRARY</ion-button>
+<ion-button (click)="cropped()" expand="full" color="danger">CROP IMAGE</ion-button>
+<ion-button (click)="send()" expand="full" color="danger">SEND IMAGE</ion-button>
 <p aling="center"><img src="{{image}}"></p>
 </ion-content>
