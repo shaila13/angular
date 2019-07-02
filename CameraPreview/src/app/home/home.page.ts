@@ -1,10 +1,8 @@
 import { Component } from '@angular/core'; 
-
-import { CameraPreview } from '@ionic-native/camera-preview/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { HttpClient } from 'selenium-webdriver/http';
 
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +12,10 @@ import { HttpClient } from 'selenium-webdriver/http';
 export class HomePage {
   image: any;
 
-  constructor(private cameraPreview: CameraPreview, private camera: Camera, public http: HttpClient) {}
+  constructor(private camera: Camera, public http: HttpClient) {}
 
   takePhoto() {
+
     const options: CameraOptions = {
       quality: 100,
       targetWidth: 300,
@@ -26,10 +25,11 @@ export class HomePage {
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: true
     }
-
+  
+    
     this.camera.getPicture(options).then((imageData) => {
       this.image = 'data:image/jpeg;base64,' + imageData;
-
+  
     }, (err) => {
       console.log('ERROR ' + err);
     });
@@ -84,9 +84,8 @@ sendPicture( ) {
 
 
 }
-post(formDataToUpload: FormData): Observable<any> {
-  return this.http.post('http://192.168.11.1:5000/upload', formDataToUpload);
-}
+
+
 private dataURItoBlob(dataURI: any) {
 
   // convert base64/URLEncoded data component to raw binary data held in a string
