@@ -9,7 +9,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class PostserviceService {
 
 
-  constructor(private firestore: AngularFireStorage) { }
+constructor(private firestore: AngularFireStorage) { }
 
   post(formDataToUpload: FormData) {
      // Upload image

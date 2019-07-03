@@ -1,8 +1,9 @@
-import { Component } from '@angular/core'; 
+import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { PostserviceService } from '../services/postservice.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 export class HomePage {
   image: any;
 
-  constructor(private camera: Camera, public http: HttpClient) {}
+  constructor(private camera: Camera, public http: HttpClient, private postService: PostserviceService) {}
 
   takePhoto() {
 
@@ -24,12 +25,12 @@ export class HomePage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: true
-    }
-  
-    
+    };
+
+
     this.camera.getPicture(options).then((imageData) => {
       this.image = 'data:image/jpeg;base64,' + imageData;
-  
+
     }, (err) => {
       console.log('ERROR ' + err);
     });
@@ -44,8 +45,8 @@ getImage() {
     destinationType: this.camera.DestinationType.DATA_URL,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     saveToPhotoAlbum: false
-  }
-  
+  };
+
   this.camera.getPicture(options).then((imageData) => {
     this.image = 'data:image/jpeg;base64,' + imageData;
 
@@ -54,7 +55,7 @@ getImage() {
   });
 
 }
-cropped(){
+cropped() {
   const options: CameraOptions = {
     quality: 100,
     targetWidth: 300,
@@ -62,8 +63,8 @@ cropped(){
     destinationType: this.camera.DestinationType.DATA_URL,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     saveToPhotoAlbum: false,
-    allowEdit:true
-  }
+    allowEdit: true
+  };
   this.camera.getPicture(options).then((imageData) => {
     this.image = 'data:image/jpeg;base64,' + imageData;
 
@@ -81,7 +82,7 @@ sendPicture( ) {
   const blob = this.dataURItoBlob(this.image);
 
   formDataToUpload.append('image', blob, fileName);
-
+  this.postService.post(formDataToUpload);
 
 }
 
