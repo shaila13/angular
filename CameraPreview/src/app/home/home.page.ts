@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { PostserviceService } from '../services/postservice.service';
 
 @Component({
@@ -11,9 +9,9 @@ import { PostserviceService } from '../services/postservice.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  image: any;
+  image: string = null;
 
-  constructor(private camera: Camera, public http: HttpClient, private postService: PostserviceService) {}
+  constructor(private camera: Camera, private postService: PostserviceService) {}
 
   takePhoto() {
 
@@ -30,7 +28,6 @@ export class HomePage {
 
     this.camera.getPicture(options).then((imageData) => {
       this.image = 'data:image/jpeg;base64,' + imageData;
-
     }, (err) => {
       console.log('ERROR ' + err);
     });
@@ -65,6 +62,7 @@ cropped() {
     saveToPhotoAlbum: false,
     allowEdit: true
   };
+
   this.camera.getPicture(options).then((imageData) => {
     this.image = 'data:image/jpeg;base64,' + imageData;
 
@@ -73,19 +71,18 @@ cropped() {
   });
 }
 
-
 sendPicture( ) {
   const random = Math.floor(Math.random() * 1000);
   const fileName = 'image_' + random + '.jpg';
 
   const formDataToUpload = new FormData();
   const blob = this.dataURItoBlob(this.image);
-
+  alert(blob);
   formDataToUpload.append('image', blob, fileName);
+  alert(formDataToUpload);
   this.postService.post(formDataToUpload);
 
 }
-
 
 private dataURItoBlob(dataURI: any) {
 
@@ -93,7 +90,6 @@ private dataURItoBlob(dataURI: any) {
               let byteString: string;
               if (dataURI.split(',')[0].indexOf('base64') >= 0) {
                   byteString = atob(dataURI.split(',')[1]);
-
               } else {
                   byteString = unescape(dataURI.split(',')[1]);
               }
@@ -106,5 +102,5 @@ private dataURItoBlob(dataURI: any) {
                   ia[i] = byteString.charCodeAt(i);
               }
               return new Blob([ia], {type: mimeString});
-          }
+}
 }
