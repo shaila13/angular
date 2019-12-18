@@ -1,0 +1,7 @@
+{
+  "name": "photoSharer",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

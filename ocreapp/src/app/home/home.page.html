@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Tesseract
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content padding>
+  <ng-progress [min]="0" [max]="1"></ng-progress>
+ 
+  <button ion-button full (click)="selectSource()">Select Image</button>
+  <button ion-button full (click)="recognizeImage()" [disabled]="!selectedImage">Recognize Image</button>
+ 
+  <img [src]="selectedImage" *ngIf="selectedImage">
+ 
+  <ion-card *ngIf="imageText">
+    <ion-card-header>
+      Image Text
+    </ion-card-header>
+    <ion-card-content>
+      {{ imageText }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

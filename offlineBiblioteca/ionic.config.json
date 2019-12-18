@@ -1,0 +1,7 @@
+{
+  "name": "offlineBiblioteca",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
